@@ -1,0 +1,59 @@
+<template name="topView">
+  <div class="top-view">
+    <div class="upper">
+      {{#constant}}
+        <div class="input-box">
+            <input type="search" placeholder="{{t "search.searchFieldPlaceholder"}}"/>
+        </div>
+        <div class="category-filter category-peek white"></div>
+        <button class="btn cancel icon-remove-sign"></button>
+        <button class="btn btn-primary menu icon-ellipsis-vertical icon-large"></button>
+      {{/constant}}
+    </div>
+    <div class="lower">
+      {{#if sessionValueTrue "showSearchView"}}
+        {{> searchView}}
+      {{/if}}
+      {{> viewMessageContainer}}
+    </div>
+  </div>
+</template>
+
+<template name="searchView">
+  <div class="search-view">
+    {{#if sessionValueTrue "showResults"}}
+      {{> searchListing}}
+    {{else}}
+      {{> categoryList}}
+    {{/if}}
+  </div>
+</template>
+
+<template name="searchListing">
+  {{#if searchResultsAreAvailable}}
+    <ul class="search-listing">
+    {{#each listingEntries}}
+      <li>
+        <h3 class="category-peek">{{name}}{{#each categories}}<div class="category {{key}}"></div>{{/each}}</h3>
+        {{{extraInfoElement}}}
+      </li>
+    {{/each}}
+    </ul>
+  {{/if}}
+  {{#if noResults}}
+    <div class="info">{{t "search.noResultsAvailable"}}</div>
+  {{/if}}
+</template>
+
+<template name="categoryList">
+  <div class="category-select">
+    {{#each categories}}<div class="category" data-category="{{key}}"><div class="{{key}}"></div><span>{{{name}}}</span></div>{{/each}}
+  </div>
+</template>
+
+<template name="viewMessageContainer">
+  <div class="view-message-container">
+    <button class="close-button btn icon-remove-sign" />
+    <p></p>
+  </div>
+</template>

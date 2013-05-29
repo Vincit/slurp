@@ -1,0 +1,53 @@
+// Use this file to define custom color variables
+
+@text-blue: #325473;
+@background-blue: #34495e;
+@active-dark-blue: #1e2d3c;
+@hover-blue: mix(@background-blue, @active-dark-blue, 70%);
+@hover-dark-blue: mix(@background-blue, @active-dark-blue, 40%);
+@hover-section: mix(@separator-gray, white, 50%);
+
+@text-light-gray: #a0a0a0;
+@text-gray: #555555;
+@text-dark-gray: #2c2c2c;
+@text-placeholder: #999999;
+@separator-gray: #eeeeee;
+
+@text-orange: #e67e22;
+
+@text-turquoise: #22aec7;
+
+@base: @text-dark-gray;
+@button-text: white;
+
+@button-gray: @text-light-gray;
+@button-hover: mix(@button-gray, white, 80%);
+@button-active: mix(@button-gray, black, 85%);
+
+@primary: @background-blue;
+@button-primary-hover: mix(@primary, white, 80%);
+@button-primary-active: mix(@primary, black, 85%);
+
+@danger: #e74c3c;
+@button-danger-hover: mix(@danger, white, 80%);
+@button-danger-active: mix(@danger, black, 85%);
+
+@warning: #f1c40f;
+@button-warning-hover: mix(@warning, white, 80%);
+@button-warning-active: mix(@warning, black, 85%);
+
+@light: #fcfcfc;
+@button-light-hover: mix(@light, black, 88%);
+@button-light-active: mix(@light, black, 84%);
+
+@link-color: mix(@primary, white, 85%);
+@link-hover-color: mix(@primary, white, 70%);
+
+@site-thumbs-up: #bdff86;
+@site-thumbs-up-dark: mix(@site-thumbs-up, black, 90%);
+
+@site-thumbs-down: #ffa587;
+@site-thumbs-down-dark: mix(@site-thumbs-down, black, 90%);
+
+@locality-marker: #0f5b7c;
+@locality-marker-hover: #257193;

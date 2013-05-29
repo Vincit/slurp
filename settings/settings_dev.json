@@ -1,0 +1,23 @@
+{
+  "public": {
+      "env": "dev",
+      "baseUrl": "http://localhost:3000",
+      "maxFileSize": 10485760
+  },
+  "developmentSettings": true,
+  "pointsGiven": {
+    "user": {
+      "rate": 5,
+      "comment": 5,
+      "addPicture": 10,
+      "modifySite": 10,
+      "createSite": 15
+    },
+    "site": {
+      "rate": 5,
+      "comment": 5,
+      "addPicture": 10,
+      "modify": 15
+    }
+  }
+}

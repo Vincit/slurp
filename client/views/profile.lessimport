@@ -1,0 +1,52 @@
+.profile-info {
+  max-width: 350px;
+  margin: 0 auto;
+  border: 0 solid @separator-gray;
+  border-width: 8px 0;
+  text-align: center;
+
+  & > div,
+  form {
+    margin: 20px 10px 10px;
+    overflow: auto;
+  }
+
+  img {
+    display: inline-block;
+    height: 128px;
+    margin-bottom: 8px;
+  }
+
+  .field {
+    h3 {
+      margin: 0 0 3px !important;
+      color: @text-light-gray;
+      font-size: 14px !important;
+      font-weight: 700;
+    }
+    div {
+      color: @text-dark-gray;
+      font-size: 20px;
+      font-weight: 300;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 80%;
+      margin-bottom: 3px;
+      border-color: @separator-gray;
+      /* So that the placeholder text won't use this color if
+       * jQuery.placeholder is used. */
+      &:not(.placeholder) {
+        color: @text-dark-gray;
+      }
+    }
+  }
+
+  .email-not-verified {
+    margin-top: 15px;
+    div {
+      margin-bottom: 5px;
+    }
+  }
+}

@@ -1,0 +1,20 @@
+# Meteor packages used by this project, one per line.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+preserve-inputs
+jquery
+less
+accounts-password
+accounts-facebook
+accounts-google
+jquery-validation
+spin
+aws-sdk
+GraphicsMagick
+fancybox
+HTML5-History-API
+respond
+npm
+crypto-md5

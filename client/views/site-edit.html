@@ -1,0 +1,102 @@
+<template name="editRoute">
+  {{#if currentUser}}
+    <div class="site-edit">
+      <h1>
+        {{#if activeSite}}
+          {{t "routes.editRouteHeader"}}
+        {{else}}
+          {{t "routes.newRouteHeader"}}
+        {{/if}}
+      </h1>
+      <div class="content-container no-tabs">
+        <div class="content">
+          <div>
+            <p>
+              {{t "routes.routeEditGuideText"}}
+            </p>
+            {{#if isTouchDevice}}
+              <button class="btn btn-primary add-point">
+                {{t "routes.addPoint"}}
+              </button>
+            {{/if}}
+            <button class="btn btn-warning remove-selected">
+              {{t "routes.editingRemoveSelectedPoint"}}
+            </button>
+            <div class="right-side-button">
+              <button class="btn btn-danger cancel">
+                {{#if activeSite}}
+                  {{t "routes.cancelChanges"}}
+                {{else}}
+                  {{t "routes.discardRoute"}}
+                {{/if}}
+              </button>
+              <button class="btn btn-primary finish">{{t "routes.save"}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+</template>
+
+<template name="editPlace">
+  {{#if currentUser}}
+    <div class="site-edit">
+      <h1>
+        {{#if activeSite}}
+          {{t "places.editPlaceHeader"}}
+        {{else}}
+          {{t "places.newPlaceHeader"}}
+        {{/if}}
+      </h1>
+      <div class="content-container no-tabs">
+        <div class="content">
+          <div>
+            <p>
+              {{t "places.placeEditGuideText"}}
+            </p>
+            {{#if isTouchDevice}}
+              <button class="btn btn-primary move-place">
+                {{t "places.movePlace"}}
+              </button>
+            {{/if}}
+            <div class="right-side-button">
+              <button class="btn btn-danger cancel">
+                {{#if activeSite}}
+                  {{t "places.cancelChanges"}}
+                {{else}}
+                  {{t "places.discardPlace"}}
+                {{/if}}
+              </button>
+              <button class="btn btn-primary finish">{{t "places.save"}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+</template>
+
+<template name="importRoute">
+  <div class="site-edit">
+    <h1>{{t "routes.importRouteTitle"}}</h1>
+    <div class="content-container no-tabs">
+      <div class="content">
+        <div>
+        {{#if browserSupportsFileApi}}
+          <p>{{t "routes.importRouteGuideText"}}</p>
+          <div class="file-picker-container">
+            <label for="file-picker"><button class="btn btn-primary">{{t "routes.selectGPXFile"}}</button></label>
+            <button class="btn file-picker-clear"><span class="icon-remove"> </span>{{t "site.pictureSelectionClear"}}</button>
+            <button class="import right-side-button btn btn-primary" class="btn btn-primary">{{t "routes.importRouteAction"}}</button>
+            <span class="file-picker-status"></span>
+            <input id="file-picker" class="file-picker" type="file" />
+          </div>
+        {{else}}
+          {{t "routes.importGpxUnsupportedBrowser"}}
+        {{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

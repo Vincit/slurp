@@ -1,0 +1,38 @@
+<template name="login">
+  <div class="login-view">
+    <h1>{{t "user.loginHeader"}}</h1>
+    <p class="logging-in hidden">{{t "user.loggingIn"}}</p>
+    <p class="login-failed hidden">{{t "user.loginFailed"}}</p>
+    <form id="login-form">
+      <div>
+        <input type="email" placeholder="{{t "user.email"}}" id="login-email" name="login-email" class="dialog-input"/>
+        <input type="password" placeholder="{{t "user.password"}}" id="login-password" name="login-password" class="dialog-input"/>
+        <input type="submit" id="login-finalize-button" value="{{t "user.loginSubmitButton"}}" class="btn btn-primary"/>
+      </div>
+    </form>
+    <button class="btn btn-primary btn-small facebook-login-button">{{t "user.loginWithFacebook"}}<i class="icon-facebook"></i></button><button class="btn btn-primary btn-small google-login-button">{{t "user.loginWithGoogle"}}<i class="icon-google-plus"></i></button>
+    <hr class="login-divider">
+    <div class="login-redirect-buttons">
+      <a href="/register">{{t "user.registerRedirect"}}</a>
+      <a href="/forgot-password">{{t "user.forgotPasswordAction"}}</a>
+    </div>
+  </div>
+</template>
+
+<template name="register">
+  <div id="register-view">
+    <h1>{{t "user.registerHeader"}}</h1>
+    <form id="register-form">
+      <div class="error hidden" id="register-general-error">
+        {{t "validation.registerFailed"}}
+      </div>
+      <div>
+        <input type="email" placeholder="{{t "user.email"}} ({{t "user.visibilityPrivate"}})" id="register-email" name="register-email" class="dialog-input"/>
+        <input type="text" placeholder="{{t "user.name"}} ({{t "user.visibilityPublic"}})" id="register-name" name="register-name" class="dialog-input"/>
+        <input type="password" placeholder="{{t "user.password"}}" id="register-password" name="register-password" class="dialog-input"/>
+        <input type="password" placeholder="{{t "user.passwordConfirm"}}" id="register-password-confirm" name="register-password-confirm" class="dialog-input"/>
+        <input type="submit" id="register-finalize-button" value="{{t "user.registerSubmitButton"}}" class="btn btn-primary"/>
+      </div>
+    </form>
+  </div>
+</template>

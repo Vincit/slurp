@@ -1,0 +1,53 @@
+#main-menu {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  width: 220px;
+  z-index: (@ui-element-base-z-index + 6);
+  background: @background-blue;
+  .border-radius(3px);
+}
+#main-menu ul {
+  max-height: 100%;
+  margin: 3px 0;
+  overflow: auto;
+  list-style: none;
+}
+#main-menu ul li {
+  color: white;
+}
+#main-menu ul li.separator {
+  height: 12px;
+}
+#main-menu ul li a {
+  display: block;
+  padding: 10px 14px 8px 10px;
+  text-decoration: none;
+  color: inherit;
+}
+#main-menu ul li a span.menu-icon {
+  display: inline-block;
+  height: 20px;
+  width: 22px;
+  margin-right: 10px;
+  font-size: 20px;
+  text-align: center;
+}
+#main-menu ul li a span.menu-text {
+  display: inline-block;
+  line-height: 20px;
+  vertical-align: top;
+}
+#main-menu ul li a:hover {
+  background: @hover-blue;
+}
+#main-menu .dropdown-arrow {
+  position: absolute;
+  top: -9px;
+  height: 0;
+  width: 0;
+  margin: 0;
+  border-style: solid;
+  border-width: 0 9px 9px 9px;
+  border-color: transparent transparent @background-blue transparent;
+}

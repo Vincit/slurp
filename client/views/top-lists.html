@@ -1,0 +1,32 @@
+<template name="topLists">
+  <div class="header">
+    <h1>{{t "topLists.header"}}</h1>
+    {{> tabBar}}
+  </div>
+  <div class="content-container">
+    <div class="content">
+      <div class="top-lists">
+        {{> topUsers}}
+        {{> topSites}}
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="topUsers">
+  {{#if sessionValueEquals "detailViewCurrentTab" "users"}}
+    <h2>{{t "topLists.usersHeader"}}</h2>
+    {{#each users}}
+      {{> entityHeader}}
+    {{/each}}
+  {{/if}}
+</template>
+
+<template name="topSites">
+  {{#if sessionValueEquals "detailViewCurrentTab" "sites"}}
+    <h2>{{t "topLists.sitesHeader"}}</h2>
+    {{#each sites}}
+      {{> entityHeader}}
+    {{/each}}
+  {{/if}}
+</template>

@@ -1,0 +1,9 @@
+@media print {
+  .top-view {
+    display: none;
+  }
+
+  .lower-left-toolbar {
+    display: none;
+  }
+}

@@ -1,0 +1,32 @@
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta content="minimum-scale=1.0, maximum-scale=1.0, width=device-width, user-scalable=no" name="viewport">
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <title>Liikunta- ja ulkoilureitit</title>
+</head>
+
+<body>
+  {{> map}}
+  {{> topView}}
+  {{> detailView}}
+  {{> dialogContainer}}
+  {{> mainMenu}}
+  {{> lowerLeftToolbar}}
+  {{> siteEditSight}}
+  {{> loadIndicator}}
+</body>
+
+<template name="siteEditSight">
+  {{#if sessionValueTrue "siteEditModeOn"}}
+    {{#if isTouchDevice}}
+      <div id="site-edit-sight"></div>
+    {{/if}}
+  {{/if}}
+</template>
+
+<template name="loadIndicator">
+  {{#unless subscriptionsReady}}
+    <div id="load-indicator"></div>
+  {{/unless}}
+</template>

@@ -1,0 +1,201 @@
+{
+  "sources": {
+    "lipasReititKaikki": {
+      "enabled": true,
+      "loadOnDev": false,
+      "hasUniqueIds": true,
+      "url": "http://lipas.cc.jyu.fi/geoserver/lipas/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=lipas:lipas_kaikki_reitit&srsName=EPSG:4326&outputFormat=application/JSON",
+      "idPrefix": "LIPAS",
+      "format": "lipas",
+      "attribution": {
+        "sourceName": "Lipas- liikuntapaikat.fi tietokanta, Jyväskylän yliopisto",
+        "sourceUrl": "http://www.liikuntapaikat.fi/"
+      },
+      "typeCodeWhitelist": [1550, 4401, 4402, 4403, 4404, 4405, 4411, 4412, 4430, 4440, 4451, 4452],
+      "categories": [
+        {
+          "typeCodes": [4430, 4440],
+          "categoryKey": "animal-sports"
+        },
+        {
+          "typeCodes": [4411, 4412],
+          "categoryKey": "cycling"
+        },
+        {
+          "typeCodes": [],
+          "categoryKey": "extreme"
+        },
+        {
+          "typeCodes": [4404, 4405],
+          "categoryKey": "hiking"
+        },
+        {
+          "typeCodes": [],
+          "categoryKey": "indoor"
+        },
+        {
+          "typeCodes": [],
+          "categoryKey": "kids"
+        },
+        {
+          "typeCodes": [],
+          "categoryKey": "running"
+        },
+        {
+          "typeCodes": [4451, 4452],
+          "categoryKey": "water-sports"
+        },
+        {
+          "typeCodes": [1550, 4402, 4440],
+          "categoryKey": "winter-sports"
+        }
+      ]
+    },
+    "lipasPaikatKaikki": {
+      "enabled": true,
+      "loadOnDev": false,
+      "hasUniqueIds": true,
+      "url": "http://lipas.cc.jyu.fi/geoserver/lipas/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=lipas:lipas_kaikki_pisteet&srsName=EPSG:4326&outputFormat=application/JSON",
+      "idPrefix": "LIPAS",
+      "format": "lipas",
+      "attribution": {
+        "sourceName": "Lipas- liikuntapaikat.fi tietokanta, Jyväskylän yliopisto",
+        "sourceUrl": "http://www.liikuntapaikat.fi/"
+      },
+      "typeCodeWhitelist": [201, 202, 204, 301, 302, 304, 1140, 1150, 1160, 1170, 1220, 1610, 1620, 1630, 1640, 2120, 2130, 2250, 2370, 2380, 2610, 3110, 3210, 3220, 3230, 3240, 4110, 4220, 4230, 4240, 4410, 4460, 4630, 4640, 4710, 4720, 6110, 6120, 6130, 6140, 6210, 6220],
+      "categories": [
+        {
+          "typeCodes": [6110, 6120, 6130, 6140, 6210, 6220],
+          "categoryKey": "animal-sports"
+        },
+        {
+          "typeCodes": [1160, 1170],
+          "categoryKey": "cycling"
+        },
+        {
+          "typeCodes": [1140, 1150, 2250, 2370, 2380, 4110, 4230, 4240, 4410, 4710, 4720],
+          "categoryKey": "extreme"
+        },
+        {
+          "typeCodes": [201, 202, 204, 301, 302, 304],
+          "categoryKey": "hiking"
+        },
+        {
+          "typeCodes": [2120, 2130, 2250, 2370, 2380, 2610],
+          "categoryKey": "indoor"
+        },
+        {
+          "typeCodes": [],
+          "categoryKey": "kids"
+        },
+        {
+          "typeCodes": [],
+          "categoryKey": "running"
+        },
+        {
+          "typeCodes": [3110, 3210, 3220, 3230, 3240],
+          "categoryKey": "water-sports"
+        },
+        {
+          "typeCodes": [3240, 4110, 4220, 4230, 4240, 4410, 4630, 4640],
+          "categoryKey": "winter-sports"
+        }
+      ]
+    },
+    "talviliukupaikat": {
+      "enabled": true,
+      "loadOnDev": true,
+      "url": "http://tampere.navici.com/tampere_wfs_geoserver/tampere_iris/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=tampere_iris:WFS_TALVILIUKUPAIKKA&srsName=EPSG:4326&outputFormat=application/JSON",
+      "format": "tampere",
+      "idPrefix": "AVOINTRE",
+      "attribution": {
+        "sourceName": "&copy Tampereen kaupunki",
+        "sourceUrl": "http://data.tampere.fi/"
+      },
+      "categories": [
+        {
+          "categoryKey": "winter-sports"
+        },
+        {
+          "categoryKey": "kids"
+        }
+      ]
+    },
+    "rullalautailualueet": {
+      "enabled": true,
+      "loadOnDev": true,
+      "url": "http://tampere.navici.com/tampere_wfs_geoserver/tampere_iris/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=tampere_iris:WFS_RULLALAUTAILUALUE&srsName=EPSG:4326&outputFormat=application/JSON",
+      "format": "tampere",
+      "idPrefix": "AVOINTRE",
+      "attribution": {
+        "sourceName": "&copy Tampereen kaupunki",
+        "sourceUrl": "http://data.tampere.fi/"
+      },
+      "categories": [
+        {
+          "categoryKey": "extreme"
+        }
+      ]
+    },
+    "koirapuistot": {
+      "enabled": true,
+      "loadOnDev": true,
+      "url": "http://tampere.navici.com/tampere_wfs_geoserver/tampere_iris/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=tampere_iris:WFS_KOIRAPUISTO&srsName=EPSG:4326&outputFormat=application/JSON",
+      "format": "tampere",
+      "idPrefix": "AVOINTRE",
+      "attribution": {
+        "sourceName": "&copy Tampereen kaupunki",
+        "sourceUrl": "http://data.tampere.fi/"
+      },
+      "categories": [
+        {
+          "categoryKey": "animal-sports"
+        }
+      ]
+    },
+    "luontopolkureitit": {
+      "enabled": true,
+      "loadOnDev": true,
+      "url": "http://tampere.navici.com/tampere_wfs_geoserver/tampere_ora/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=tampere_ora:YV_LUONTOPOLKU&srsName=EPSG:4326&outputFormat=application/JSON",
+      "format": "tampere",
+      "idPrefix": "AVOINTRE",
+      "attribution": {
+        "sourceName": "&copy Tampereen kaupunki",
+        "sourceUrl": "http://data.tampere.fi/"
+      },
+      "categories": [
+        {
+          "categoryKey": "hiking"
+        }
+      ]
+    },
+    "fillaristit": {
+      "enabled": true,
+      "loadOnDev": true,
+      "hasUniqueIds": true,
+      "url": "http://www.fillaristit.fi/api/entries",
+      "format": "fillaristit",
+      "idPrefix": "FILLARI",
+      "attribution": {
+        "sourceName": "Fillaristit.fi",
+        "sourceUrl": "http://www.fillaristit.fi/?id=__id__"
+      },
+      "categories": [
+        {
+          "type": "place",
+          "categoryId": 11,
+          "categoryKey": "water-sports"
+        },
+        {
+          "type": "place",
+          "categoryId": 21,
+          "categoryKey": "cycling"
+        },
+        {
+          "type": "route",
+          "categoryKey": "cycling"
+        }
+      ]
+    }
+  }
+}

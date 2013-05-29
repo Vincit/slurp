@@ -1,0 +1,309 @@
+<template name="siteDetails">
+  <div class="header">
+    {{#with site}}
+      {{#if sessionValueTrue "siteIsNew"}}
+        <h1>
+        {{#if isRoute}}
+          {{t "routes.newRoute"}}
+        {{else}}
+          {{t "places.newPlace"}}
+        {{/if}}
+        </h1>
+      {{else}}
+        <h1 class="category-peek">{{#if sessionValue "revisionId"}}{{t "site.previewRevisionMapViewHeader"}} - {{/if}}{{getSiteName name}}
+          {{#each categories}}<div class="category {{key}}"></div>{{/each}}
+        </h1>
+      {{/if}}
+    {{else}}
+      {{#if siteIsDeleted}}
+        <h1>{{t "site.deletedSiteHeader"}}</h1>
+      {{/if}}
+    {{/with}}
+    {{#if showTabs}}
+      {{> tabBar}}
+    {{/if}}
+  </div>
+  <div class="content-container {{#unless showTabs}}no-tabs{{/unless}}">
+    <div class="content">
+      <div>
+        {{> siteDetailsGeneral}}
+        {{> siteDetailsComments}}
+        {{> siteDetailsPictures}}
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="siteDetailsGeneral">
+  {{#if sessionValueEquals "detailViewCurrentTab" "general"}}
+    {{> siteInfoEdit}}
+    {{> siteHistory}}
+    {{> siteHistoryPreview}}
+    {{> siteInfoDisplay}}
+  {{/if}}
+</template>
+
+<template name="siteInfo">
+  {{#if showName}}
+    <h3>{{getSiteName name}}</h3>
+  {{/if}}
+  {{#if isRoute}}
+    <p>{{t "site.routeLength"}}: {{length}}</p>
+  {{/if}}
+  {{newlinesToHtml description}}
+  <div class="category-display">
+    {{#each categories}}<div class="category" data-category="{{key}}"><div class="{{key}}"></div><span>{{{name}}}</span></div>{{/each}}
+  </div>
+  {{#if pictures}}
+    <div class="pictures">
+      {{#each pictures}}<div class="picture-tile"><a href="{{this}}" class="fancybox" rel="gallery"><img src="{{this}}-t" /></a></div>{{/each}}
+    </div>
+  {{/if}}
+  {{#if importId}}
+    <p class="siteAttribution">{{{attributionHtml}}}<p>
+  {{/if}}
+</template>
+
+<template name="siteInfoDisplay">
+  {{#if showInfoDisplay}}
+    {{#with site}}
+      {{> siteRating}}
+      {{> siteInfo}}
+      {{#if currentUser}}
+        {{#if emailVerified}}
+          <div class="edit-actions">
+            <h3>{{t "site.editActionsHeader"}}</h3>
+            <button class="btn btn-primary btn-small edit-info-button"><span class="icon-edit"> </span>{{t "site.edit"}}</button>{{#if locationEditable}}<button class="btn btn-primary btn-small edit-location-button"><span class="icon-screenshot"> </span>{{locationEditText}}</button>{{/if}}<span class="extended-buttons"><button class="btn btn-primary btn-small revision-history-button"><span class="icon-file"> </span>{{t "site.browseRevisionHistory"}}</button><button class="btn btn-danger btn-small remove-site-button"><span class="icon-remove"/> </span>{{t "site.deleteSite"}}</button></span><button class="show-all-buttons btn btn-small btn-light">{{t "site.showMoreActions"}} <i class="icon-angle-right"></i></button>
+          </div>
+        {{else}}
+          <p>{{{verifyEmailPrompt}}}</p>
+        {{/if}}
+      {{else}}
+        <p>{{{loginPrompt}}}</p>
+      {{/if}}
+    {{/with}}
+  {{/if}}
+</template>
+
+<template name="siteHistory">
+  {{#if sessionValueEquals "currentContentView" "revisionHistory"}}
+    {{#if currentUser}}
+      {{#if emailVerified}}
+        <div class="field">
+          {{#each revisions}}
+            {{> revision}}
+          {{else}}
+            <h2>{{t "site.noPreviousVersions"}}</h2>
+          {{/each}}
+        </div>
+        <button class="back-button btn">{{t "site.back"}}</button>
+      {{else}}
+        <p>{{{verifyEmailPrompt}}}</p>
+      {{/if}}
+    {{else}}
+      <p>{{{loginPrompt}}}</p>
+    {{/if}}
+  {{/if}}
+</template>
+
+<template name="revision">
+  <div id="revision-{{seq}}" class="revision{{#unless original}} openable{{/unless}}">
+    <p class="sequence-number">#{{seq}}</p>
+    <p>{{#if imported}}{{t "site.imported"}}{{else}}<b>{{getUserName author}}</b>{{/if}} {{longDate timestamp}}</p>
+    {{#if original}}
+      <p>{{{restoredFromRevision original}}}</p>
+    {{else}}
+      {{#if showRevisionInfo}}
+        <div class='revision-info'>
+          {{#with revisionData}}
+            {{> siteInfo}}
+          {{/with}}
+        </div>
+        {{#if revisionData}}
+          <button class="preview-button btn btn-primary">{{t "site.previewRevisionOnMap"}}</button>
+          <button class="restore-button btn btn-primary">{{t "site.restoreRevision"}}</button>
+        {{else}}
+          <p>{{t "site.fetchingRevisionData"}}</p>
+        {{/if}}
+      {{else}}
+        {{#if deleted}}
+          <p>{{t "site.siteDeletedOnRevision"}}</p>
+        {{/if}}
+        <p>{{t "site.openToPreviewRevision"}}</p>
+      {{/if}}
+    {{/if}}
+  </div>
+</template>
+
+<template name="siteHistoryPreview">
+  {{#if sessionValueEquals "currentContentView" "revisionHistoryPreview"}}
+    <div class="site-preview-legend">
+    {{#if siteIsRoute}}
+      {{#if currentVersionExists}}
+        <div class="site-legend-block">
+          <div class="route-color-legend current-site-legend-link"></div>
+          <button class="btn btn-primary current-site-legend-link">{{t "site.currentRevision"}}</button>
+        </div>
+      {{/if}}
+      <div class="site-legend-block">
+        <div class="route-color-legend revision-site-legend-link"></div>
+        <button class="btn btn-primary revision-site-legend-link">{{t "site.previewedRevision" seq=revision.seq}}</button>
+        <button class="restore-button btn btn-primary">{{t "site.restoreRevision"}}</button>
+      </div>
+    {{else}}
+      {{#if currentVersionExists}}
+        <div class="site-legend-block">
+          <img class ="place-legend-marker-img current-site-legend-link" src="/images/markers/marker-highlighted.png">
+          <button class="btn btn-primary current-site-legend-link">{{t "site.currentRevision"}}</button>
+        </div>
+      {{/if}}
+      <div class="site-legend-block">
+        <img class="place-legend-marker-img revision-site-legend-link" src="/images/markers/marker-preview.png">
+        <button class="btn btn-primary revision-site-legend-link">{{t "site.previewedRevision" seq=revision.seq}}</button>
+        <button class="restore-button btn btn-primary">{{t "site.restoreRevision"}}</button>
+      </div>
+    {{/if}}
+    </div>
+    <button class="back-button btn">{{t "site.back"}}</button>
+  {{/if}}
+</template>
+
+<template name="siteInfoEdit">
+  {{#if sessionValueEquals "currentContentView" "detailsEdit"}}
+    {{#with site}}
+      {{#if currentUser}}
+        {{#if emailVerified}}
+          <div class="field">
+            <span class="field-label">{{t "site.name"}}</span>
+            <div class="full-width">
+              <input id="site-name-edit" type="text" value="{{name}}" />
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">{{t "site.description"}}</span>
+            <div class="full-width">
+              <textarea id="site-description-edit">{{description}}</textarea>
+            </div>
+          </div>
+          {{#if pictures}}
+            <div class="pictures picture-removal-container field">
+              <span class="field-label">{{t "site.selectImagesForRemoval"}}</span>
+              {{#each pictures}}<div class="picture-tile"><span class="icon-remove"></span><img src="{{this}}-t"/></div>{{/each}}
+            </div>
+          {{/if}}
+          <div class="file-picker-container field">
+            <span class="field-label">{{t "site.addPictures"}}</span>
+            {{#if browserSupportsFileList}}
+              <label for="file-picker"><button class="btn btn-primary">{{t "site.selectPictureFiles"}}</button></label>
+              <button class="btn file-picker-clear"><span class="icon-remove"> </span>{{t "site.pictureSelectionClear"}}</button>
+              <p class="file-picker-status"></p>
+              <input id="file-picker" class="file-picker" type="file" accept="image/*" multiple />
+            {{else}}
+              <p>{{t "site.addingPicturesNotSupported"}}</p>
+            {{/if}}
+          </div>
+          <div class="field category-select">
+            <span class="field-label">{{t "site.categories"}}</span>
+            {{#each allCategories}}<div class="category" data-category="{{key}}"><div class="{{key}}"></div><span>{{{name}}}</span></div>{{/each}}
+          </div>
+          <div class="pull-right">
+            {{#unless sessionValueTrue "siteIsNew"}}
+              <a href="/site/{{_id}}/general" class="btn">{{t "site.back"}}</a>
+            {{/unless}}
+            <button id="save-site-details" class="btn btn-primary">{{t "site.save"}}</button>
+          </div>
+        {{else}}
+          <p>{{{verifyEmailPrompt}}}</p>
+        {{/if}}
+      {{else}}
+        <p>{{{loginPrompt}}}</p>
+      {{/if}}
+    {{/with}}
+  {{/if}}
+</template>
+
+<template name="siteDetailsComments">
+  {{#if sessionValueEquals "detailViewCurrentTab" "comments"}}
+    <div class="comment-section">
+      {{#unless showComments}}
+        <h2>{{t "comments.noCommentsToShow"}}</h2>
+      {{/unless}}
+      {{#if currentUser}}
+        <button class="show-comment-form btn btn-primary">{{t "comments.writeCommentAction"}} <span class="icon-comment"></span></button>
+        <div class="new-comment">
+          <h3>{{t "comments.writeCommentHeader"}}</h3>
+          <div class="full-width"><textarea class="comment-text"></textarea></div>
+          <div class="file-picker-container">
+            <button class="send-comment pull-right btn btn-primary" class="btn btn-primary">{{t "comments.sendComment"}}</button>
+            {{#if browserSupportsFileList}}
+              <label for="file-picker"><button class="btn btn-primary">{{t "comments.attachImage"}}</button></label>
+              <button class="btn file-picker-clear"><span class="icon-remove"> </span>{{t "site.pictureSelectionClear"}}</button>
+              <span class="file-picker-status"></span>
+              <input id="file-picker" class="file-picker" type="file" accept="image/*" />
+            {{else}}
+              <p>{{t "site.addingPicturesNotSupported"}}</p>
+            {{/if}}
+          </div>
+        </div>
+      {{else}}
+        <p>{{t "comments.loginToComment" url="/login"}}</p>
+      {{/if}}
+      {{#each comments}}
+        <div class="comment">
+          {{#with commentHeader}}
+            {{> entityHeader}}
+          {{/with}}
+          {{#if this.picture}}
+            <div class="picture-tile"><a href="{{this.picture}}" class="fancybox"><img src="{{this.picture}}-t" /></a></div>
+          {{/if}}
+          {{#if text}}
+            {{newlinesToHtml text}}
+            {{#if userIsAuthor}}
+              <a href="#" class="remove-comment"><i class="icon-trash"> </i>{{t "comments.removeComment"}}</a>
+            {{/if}}
+          {{else}}
+            <p class="comment-removed">{{t "comments.commentRemovedTextReplacement"}}</p>
+          {{/if}}
+        </div>
+      {{/each}}
+    </div>
+  {{/if}}
+</template>
+
+<template name="siteDetailsPictures">
+  {{#if sessionValueEquals "detailViewCurrentTab" "pictures"}}
+    <div class="pictures">
+    {{#each pictures}}<div class="picture-tile"><a href="{{this}}" class="fancybox" rel="gallery"><img src="{{this}}-t" /></a></div>{{else}}
+      <h2>{{t "site.noPictures"}}</h2>
+      <p>{{t "site.pictureAddingInstructions"}}</p>
+    {{/each}}
+    </div>
+  {{/if}}
+</template>
+
+<template name="siteRating">
+  <div class="rate-site{{#if userRating}} user-rated{{/if}}">
+    {{#if showRatingText}}
+      <p class="rating-text">
+        {{#unless ratingsAvailable}}
+          {{t "site.hasNoRatings"}}
+        {{/unless}}
+      </p>
+    {{/if}}
+    {{#if currentUser}}
+      {{#unless userRating}}<p>{{t "site.rateGuideText"}}</p>{{/unless}}
+      <div class="rate-action">
+        <button class="btn thumbs-up icon-thumbs-up{{#if userRatingIsPositive}} active{{/if}}"></button>
+        <button class="btn thumbs-down icon-thumbs-down{{#if userRatingIsNegative}} active{{/if}}"></button>
+        <h3>{{#if ratingsAvailable}}{{t "site.siteRating" rating=ratingPercentage}}{{else}}{{t "site.rateActionText"}}{{/if}}</h3>
+      </div>
+    {{/if}}
+    {{#if ratingsAvailable}}
+      {{#unless currentUser}}<h3>{{t "site.siteRating" rating=ratingPercentage}}</h3>{{/unless}}
+      <div class="bars">
+        <div class="down" style="width:{{negativeWidth}}%;"><span class="pull-left">{{negativeCount}}</span></div>
+        <div class="up" style="width:{{positiveWidth}}%;"><span class="pull-right">{{positiveCount}}</span></div>
+      </div>
+    {{/if}}
+  </div>
+</template>

@@ -1,0 +1,6 @@
+{
+  "string": "1.5.0",
+  "i18next": "1.6.8",
+  "validator": "1.4.0",
+  "node-schedule": "0.1.8"
+}

@@ -1,0 +1,18 @@
+<template name="dialogContainer">
+  {{#if sessionValueTrue "showDialog"}}
+    <div class="dialog-container">
+      <button class="close-button icon-remove-sign" />
+      {{#if sessionValueEquals "currentPrimaryView" "login"}}
+        {{> login}}
+      {{/if}}
+      {{#if sessionValueEquals "currentPrimaryView" "register"}}
+        {{> register}}
+      {{/if}}
+      {{#if sessionValueEquals "currentPrimaryView" "forgotPassword"}}
+        {{> forgotPassword}}
+      {{/if}}
+      {{#if sessionValueEquals "currentPrimaryView" "resetPassword"}}
+        {{> resetPassword}}
+      {{/if}}
+  {{/if}}
+</template>

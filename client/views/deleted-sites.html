@@ -1,0 +1,28 @@
+<template name="deletedSites">
+  {{#if Meteor.user}}
+    <div class="header">
+      <h1>{{t "site.deletedSitesHeader"}}</h1>
+    </div>
+    <div class="content-container no-tabs">
+    <div class="content">
+      {{#if sessionValue "siteDetailsId"}}
+        {{> siteHistory}}
+      {{else}}
+        <div>
+          {{#each sites}}
+            <div>
+              <h2>{{name}}</h2>
+              {{{getDeletedSiteInfo}}}
+              <button class="deleted-site-preview-button btn btn-primary">{{t "site.previewDeletedSiteRevisionHistory"}}</button>
+            </div>
+          {{else}}
+            {{t "site.noDeletedSites"}}
+          {{/each}}
+        </div>
+      {{/if}}
+    </div>
+  </div>
+  {{else}}
+    <h2>{{t "site.loginToBrowseDeletedSites" url="/login"}}</h2>
+  {{/if}}
+</template>

@@ -1,0 +1,76 @@
+/* For enabling full page map using only CSS and
+   that works even when the browser window is resized */
+#map { height: 100%; }
+
+button.icon-large {
+  height: 40px;
+  width: 40px;
+}
+
+.lower-left-toolbar {
+  position: absolute;
+  left: 5px;
+  bottom: 5px;
+  z-index: @ui-element-base-z-index;
+}
+// Hide when detail view is open and window width is low
+@media (max-width: 1180px) {
+  .detail-view-open .lower-left-toolbar {
+    display: none;
+  }
+}
+// Hide when dialog is open and window width is low
+@media (max-width: 700px) {
+  .dialog-open .lower-left-toolbar {
+    display: none;
+  }
+}
+#locate-button.active {
+  background-color: white;
+  color: #008fff;
+  border: 1px solid #008fff;
+}
+
+.site-count-marker {
+  font-family: @base-font-family;
+
+  div {
+    width: 36px;
+    line-height: 20px;
+    padding: 8px 0;
+    background-color: @locality-marker;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    .border-radius(3px);
+  }
+  .arrow {
+    position: relative;
+    top: 4px;
+    left: 11px;
+    height: 0;
+    width: 0;
+    margin: 0;
+    border-style: solid;
+    border-width: 7px 7px 0 7px;
+    border-color: @locality-marker transparent transparent transparent;
+  }
+  &:hover {
+    div {
+      background-color: @locality-marker-hover;
+    }
+    .arrow {
+      border-top-color: @locality-marker-hover;
+    }
+  }
+}
+
+#site-load-spinner {
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.6);
+  height: 40px;
+  width: 40px;
+  vertical-align: middle;
+  .border-radius(3px);
+}

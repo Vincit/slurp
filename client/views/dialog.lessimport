@@ -1,0 +1,57 @@
+.dialog-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 20%;
+  width: 300px;
+  max-height: 70%;
+  margin: auto;
+  padding: 0 10px 10px;
+  overflow: auto;
+  z-index: (@ui-element-base-z-index + 5);
+  background-color: white;
+  border-radius: 6px;
+
+  @media (max-height: 470px) {
+    top: 0px;
+    bottom: 0px;
+    max-height: none;
+    border-radius: 0;
+  }
+
+  h1 {
+    margin: 2px 0 6px;
+    padding-right: 20px;
+    color: @text-dark-gray;
+    font-size: 28px;
+    font-weight: 300;
+  }
+  form {
+    margin: 0px;
+  }
+  input {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  .dialog-input {
+    width: 270px;
+  }
+}
+
+.login-view {
+  .btn [class^="icon-"] {
+    display: inline-block;
+    margin-left: 8px;
+  }
+  .login-divider {
+    margin: 10px;
+  }
+  .login-redirect-buttons {
+    margin-bottom: 5px;
+
+    a {
+      margin-right: 8px;
+      font-size: 16px;
+    }
+  }
+}

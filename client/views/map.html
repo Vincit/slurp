@@ -1,0 +1,12 @@
+<template name="map">
+  {{#constant}}
+  <div id="map"></div>
+  {{/constant}}
+</template>
+
+<template name="lowerLeftToolbar">
+  <div class="lower-left-toolbar">
+    <button id="locate-button" class="btn btn-primary icon-location-arrow icon-large" title="{{t "map.startLocateTooltip"}}"></button>
+    <div id="site-load-spinner"></div>
+  </div>
+</template>

@@ -1,0 +1,26 @@
+<template name="info">
+  <div class="header">
+    <h1>{{t "info.header"}}</h1>
+    {{> tabBar}}
+  </div>
+  <div class="content-container">
+    <div class="content">
+      <div class="info">
+        {{> infoGuide}}
+        {{> infoGeneral}}
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="infoGuide">
+  {{#if sessionValueEquals "detailViewCurrentTab" "guide"}}
+    {{t "info.guideText"}}
+  {{/if}}
+</template>
+
+<template name="infoGeneral">
+  {{#if sessionValueEquals "detailViewCurrentTab" "general"}}
+    {{t "info.generalText"}}
+  {{/if}}
+</template>

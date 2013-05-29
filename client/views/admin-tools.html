@@ -1,0 +1,142 @@
+<template name="adminTools">
+  {{#if currentUser.isAdmin}}
+    <div class="header">
+      <h1>{{t "admin.header"}}</h1>
+      {{> tabBar}}
+    </div>
+    <div class="content-container">
+      <div class="content">
+        <div class="admin-tools">
+          {{> adminGeneral}}
+          {{> adminUsers}}
+          {{> adminComments}}
+        </div>
+      </div>
+    </div>
+  {{else}}
+    <h2>{{t "admin.userIsNotAdmin"}}</h2>
+  {{/if}}
+</template>
+
+<template name="adminGeneral">
+  {{#if sessionValueEquals "detailViewCurrentTab" "general"}}
+    <h2>{{t "admin.generalHeader"}}</h2>
+    <div class="field">
+      <h3>{{t "admin.latestChanges"}}</h3>
+      <div class="entity-list">
+        {{#each latestChanges}}
+          <div class="entity">
+            <div class="header">
+              {{{description}}}
+              <i class="icon-external-link-sign"></i>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+    <div class="field">
+      <h3>{{t "admin.newUsers"}}</h3>
+      <div class="entity-list">
+        {{#each newUsers}}
+          <div class="entity">
+            <div class="header">{{{description}}}<i class="icon-external-link-sign"></i></div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  {{/if}}
+</template>
+
+<template name="adminBanUser">
+  <h2>{{t "admin.banUserHeader"}}</h2>
+  <p>{{{userToBanInfo}}}</p>
+  <div class="admin-ban-user">
+    <form id="ban-form">
+      <div class="error hidden ban-general-error">
+        {{t "admin.banUserError"}}
+      </div>
+      <div class="field">
+        <textarea class="ban-user-reason" name="ban-user-reason" placeholder="{{t "admin.banReasonPlaceholder"}}"></textarea>
+      </div>
+      <div class="field">
+        <input class="ban-user-duration" name="ban-user-duration" type="text" placeholder="{{t "admin.banDurationPlaceholder"}}"/>
+        <select class="ban-duration-type">
+          <option value="days">{{t "admin.banDays"}}</option>
+          <option value="hours" selected>{{t "admin.banHours"}}</option>
+          <option value="minutes">{{t "admin.banMinutes"}}</option>
+        </select>
+      </div>
+      <div>
+        <input type="submit" id="ban-finalize-button" value="{{t "admin.banSubmit"}}" class="btn btn-primary"/>
+      </div>
+    </form>
+  </div>
+</template>
+
+<template name="adminUsers">
+  {{#if sessionValueEquals "detailViewCurrentTab" "users"}}
+    {{#if sessionValueEquals "currentContentView" "banUser"}}
+      {{> adminBanUser}}
+    {{else}}
+      <h2>{{t "admin.usersHeader"}}</h2>
+      <div class="field">
+        <input class="search-input" type="search" placeholder="{{t "admin.searchUsers"}}">
+      </div>
+      <div class="entity-list expandable">
+        {{#each users}}
+          <div class="entity">
+            <div class="header">
+              <b>{{profile.name}}</b> {{_id}}<i class="icon-chevron-down"></i>
+            </div>
+            <div class="content hidden">
+              <p>{{{userCreatedAt}}}</p>
+              <p>
+                <b>{{t "admin.userEmail"}}:</b> <a href="mailto:{{emails.0.address}}">{{emails.0.address}}</a>
+              </p>
+              {{#if userIsBanned}}
+                {{#with latestBan}}
+                  <div class="current-ban-info">
+                    <p><b>{{t "admin.userCurrentBanEnds"}}:</b> {{longDate end}}</p>
+                    <p>{{t "admin.userCurrentBanReason"}}: {{reason}}</p>
+                  </div>
+                {{/with}}
+              {{/if}}
+              <a href="#" class="ban-user"><i class="icon-ban-circle"> </i>{{t "admin.banUser"}}</a>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    {{/if}}
+  {{/if}}
+</template>
+
+<template name="adminComments">
+  {{#if sessionValueEquals "detailViewCurrentTab" "comments"}}
+    <h2>{{t "admin.commentsHeader"}}</h2>
+    <div class="field">
+      <input class="search-input" type="search" placeholder="{{t "admin.searchComments"}}">
+    </div>
+    {{#unless emailVerified}}
+      <p>{{t "admin.removeCommentsInfo"}}</p>
+    {{/unless}}
+    <div class="entity-list expandable">
+      {{#each latestComments}}
+        <div class="entity">
+          <div class="header">{{{t "admin.userCommented" author=userName text=shortText}}}<i class="icon-chevron-down"></i></div>
+          <div class="content hidden">
+            <h3>{{siteName}}</h3>
+            <p>{{t "admin.commentLeftAt"}} {{longDate dateTime}}</p>
+            {{#if text}}
+              {{newlinesToHtml text}}
+            {{else}}
+              <p class="comment-removed">{{t "comments.commentRemovedTextReplacement"}}</p>
+            {{/if}}
+            {{#if emailVerified}}
+              <button class="btn btn-danger btn-small remove-comment"><i class="icon-remove"> </i>{{t "admin.removeComment"}}</button>
+            {{/if}}
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  {{/if}}
+</template>

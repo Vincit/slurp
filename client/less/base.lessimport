@@ -1,0 +1,104 @@
+@import "mixins.lessimport";
+@import "fonts.lessimport";
+@import "colors.lessimport";
+@import "categories.lessimport";
+@import "input.lessimport";
+
+@import "font-awesome/font-awesome.lessimport";
+
+body {
+  color: @base;
+  font-family: @base-font-family;
+  font-size: @base-font-size;
+  line-height: @base-line-height;
+}
+
+h1,
+h2,
+h3 {
+  line-height: @base-line-height * 2;
+}
+
+p {
+  margin: 0 0 (@base-font-size * 0.666);
+}
+
+ul, ol {
+  padding: 0;
+  margin: 0 0 (@base-font-size * 0.666) 25px;
+}
+
+li {
+  line-height: @base-line-height;
+}
+
+a {
+  color: @link-color;
+  text-decoration: underline;
+  .transition(0.25s);
+
+  &:hover {
+    color: @link-hover-color;
+    text-decoration: none;
+  }
+
+  img {
+    border: 0;
+  }
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+hr {
+  border-style: solid;
+  border-width: 1px 0 1px;
+  border-top-color: mix(@text-light-gray, white, 35%);
+  border-bottom-color: mix(@text-light-gray, white, 8%);
+}
+
+.inline-block {
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+}
+
+// IE10 Metro responsive
+// Required for Windows 8 Metro split-screen snapping with IE10
+// Source: http://timkadlec.com/2012/10/ie10-snap-mode-and-responsive-design/
+@-ms-viewport {
+  width: device-width;
+}
+
+// Hide from screenreaders and browsers
+// Credit: HTML5 Boilerplate
+.hidden {
+  display: none;
+  visibility: hidden;
+}
+
+// Quick floats
+.pull-right {
+  float: right;
+}
+.pull-left {
+  float: left;
+}
+
+// For clearing floats like a boss h5bp.com/q
+.clearfix {
+  *zoom: 1;
+  &:before,
+  &:after {
+    display: table;
+    content: "";
+    // Fixes Opera/contenteditable bug:
+    // http://nicolasgallagher.com/micro-clearfix-hack/#comment-36952
+    line-height: 0;
+  }
+  &:after {
+    clear: both;
+  }
+}

@@ -1,0 +1,59 @@
+.admin-tools {
+  color: @text-dark-gray;
+
+  .search-input {
+    position: relative;
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .admin-ban-user {
+    textarea {
+      display: block;
+      resize: none;
+      width: 90%;
+      height: 68px;
+      line-height: 22px;
+      font-size: 14px;
+    }
+    input {
+      margin-right: 5px;
+    }
+  }
+
+  .entity-list {
+    .entity {
+      margin-bottom: 5px;
+
+      & > div {
+        padding: 7px 10px;
+      }
+
+      div.header {
+        margin: 0 !important;
+        background-color: @separator-gray;
+        cursor: pointer;
+
+        [class^="icon-"] {
+          float: right;
+          display: none;
+          padding-top: 2px;
+        }
+
+        &:hover {
+          background-color: mix(@separator-gray, white);
+
+          [class^="icon-"] {
+            display: inline-block;
+          }
+        }
+      }
+
+      div.content,
+      div.header.open {
+        background-color: mix(@separator-gray, white);
+      }
+    }
+  }
+}

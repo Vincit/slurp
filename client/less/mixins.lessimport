@@ -1,0 +1,69 @@
+.border-radius(@radius) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  border-radius: @radius;
+}
+
+.box-sizing(@boxmodel: border-box) {
+  -webkit-box-sizing: @boxmodel;
+  -moz-box-sizing: @boxmodel;
+  box-sizing: @boxmodel;
+}
+
+.box-shadow(@properties) {
+  -webkit-box-shadow: @properties;
+  -moz-box-shadow: @properties;
+  box-shadow: @properties;
+}
+
+.transition(@properties) {
+  -webkit-transition: @properties;
+     -moz-transition: @properties;
+       -o-transition: @properties;
+          transition: @properties;
+  -webkit-backface-visibility: hidden;
+}
+
+.placeholder-color(@color) {
+  input::-webkit-input-placeholder,
+  textarea::-webkit-input-placeholder {
+    color: @color !important;
+  }
+  input:-moz-placeholder,
+  textarea:-moz-placeholder {
+    color: @color !important;
+  }
+  input::-moz-placeholder,
+  textarea::-moz-placeholder {
+    color: @color !important;
+  }
+  input:-ms-placeholder,
+  textarea:-ms-placeholder {
+    color: @color !important;
+  }
+  input:-ms-input-placeholder,
+  textarea:-ms-input-placeholder {
+    color: @color !important;
+  }
+  input::input-placeholder,
+  textarea::input-placeholder {
+    color: @color !important;
+  }
+  /* For placeholders created with jQuery.placeholder */
+  input.placeholder, textarea.placeholder {
+    color: @color !important;
+  }
+}
+
+.swap-button-color(@color, @hover, @active) {
+  background-color: @color;
+
+  &:hover,
+  &:focus {
+    background-color: @hover;
+  }
+  &:active,
+  &.active {
+    background-color: @active;
+  }
+}

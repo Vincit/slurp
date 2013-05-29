@@ -1,0 +1,212 @@
+.top-view {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  z-index: (@ui-element-base-z-index + 5);
+
+  @media (max-width: 407px) {
+    width: 320px;
+  }
+  @media (min-width: 408px) and (max-width: 495px) {
+    width: 408px;
+  }
+  @media (min-width: 496px) {
+    width: 496px;
+  }
+
+  .input-box {
+    width: 100%;
+    padding: 5px 95px 0 5px;
+    .box-sizing(border-box);
+
+    input {
+      width: 100%;
+      margin: 0;
+      padding: 10px 32px 9px 13px;
+      background: @background-blue;
+      color: white;
+      border: none;
+    }
+  }
+
+  button.cancel {
+    display: none;
+    position: absolute;
+    top: 5px;
+    right: 50px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    background: transparent;
+    font-size: 22px;
+
+    &:hover {
+      color: mix(white, black, 85%);
+      background: transparent;
+    }
+  }
+  button.menu {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+
+  .flat-bottom {
+    .border-radius(3px 3px 0 0);
+  }
+
+  .category-filter {
+    display: none;
+
+    // Show when on a large screen
+    @media (min-width: 500px) {
+      display: block;
+      position: absolute;
+      top: 15px;
+      right: 90px;
+      background-color: transparent;
+
+      .category {
+        margin: 0 0 0 5px;
+      }
+    }
+  }
+
+  .lower {
+    position: absolute;
+    top: 45px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    z-index: (@ui-element-base-z-index + 5);
+
+    @media (max-width: 407px) {
+      width: 220px;
+    }
+    @media (min-width: 408px) and (max-width: 495px) {
+      width: 308px;
+    }
+    @media (min-width: 496px) {
+      width: 396px;
+    }
+
+    > div {
+      margin-left: -45px;
+    }
+  }
+
+  .search-view {
+    min-height: 50px;
+    margin-left: 5px;
+    background: white;
+    overflow: auto;
+    .border-radius(0 0 3px 3px);
+
+    .search-listing {
+      margin: 0;
+      list-style: none;
+
+      li {
+        padding: 6px 10px;
+        cursor: pointer;
+
+        & + li {
+          border: 0 solid @separator-gray;
+          border-width: 1px 0 0;
+        }
+        &:hover {
+          background-color: @hover-section;
+        }
+        h3 {
+          line-height: 22px;
+          margin: 0;
+          font-size: 17px;
+          font-weight: 400;
+        }
+        .category-peek .category {
+          margin: 0 0 -4px 5px;
+        }
+        .extra-info {
+          line-height: 18px;
+          color: @text-light-gray;
+        }
+      }
+    }
+    .info {
+      padding: 5px;
+      line-height: 40px;
+      font-size: 26px;
+      font-weight: 300;
+      text-align: center;
+    }
+
+    @media (min-width: 600px) {
+      .search-listing {
+        li {
+          padding: 10px 14px;
+        }
+        h3 {
+          line-height: 30px;
+          font-size: 20px;
+        }
+        .category-peek .category {
+          margin: 0 0 -2px 8px;
+        }
+        .extra-info {
+          line-height: 24px;
+        }
+      }
+    }
+  }
+}
+
+// Hide when full detail view or a dialog is open and window height is low
+@media (max-height: 700px) {
+  .detail-view-full .top-view {
+    .upper,
+    .search-view {
+      display: none;
+    }
+  }
+}
+@media (max-height: 470px) {
+  .dialog-open .top-view {
+    .upper,
+    .search-view {
+      display: none;
+    }
+  }
+}
+// Hide when in edit mode
+.edit-mode .top-view .upper {
+  display: none;
+}
+
+.view-message-container {
+  display: none;
+  margin-top: 5px;
+
+  > p {
+    background: white;
+    text-align: center;
+    font-size: 18px;
+    padding: 15px;
+    .border-radius(3px);
+  }
+  &.error > p {
+    border: solid @danger 2px;
+    padding: 13px;
+  }
+  .close-button {
+    float: right;
+    z-index: 2;
+    padding: 14px;
+    border-radius: 0;
+    border: none;
+    background-color: transparent;
+    color: @base;
+    font-size: 22px;
+  }
+}

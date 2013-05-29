@@ -1,0 +1,141 @@
+<template name="profile">
+  {{#if currentUser}}
+    <div class="header">
+      <h1>{{t "user.profileMainHeader"}}</h1>
+      {{> tabBar}}
+    </div>
+    <div class="content-container">
+      <div class="content">
+        <div>
+          {{> profileGeneral}}
+          {{> profileComments}}
+        </div>
+      </div>
+    </div>
+  {{else}}
+    <h3>{{t "user.notLoggedIn"}}</h3>
+  {{/if}}
+</template>
+
+<template name="profileGeneral">
+  {{#if sessionValueEquals "detailViewCurrentTab" "general"}}
+    {{> profileInfo}}
+    {{> editProfile}}
+    {{> changePassword}}
+    {{> removeProfile}}
+  {{/if}}
+</template>
+
+<template name="profileInfo">
+  {{#unless sessionValue "currentContentView"}}
+    {{#with currentUser}}
+      <div class="profile-info">
+        <div>
+          <a href="http://gravatar.com/emails/" title="{{t "user.changeAvatarTip"}}">
+            <img src="https://www.gravatar.com/avatar/{{emailHash}}?s=128&d=mm">
+          </a>
+          <div class="field">
+            <h3>{{t "user.name"}}</h3>
+            <div>{{profile.name}}</div>
+          </div>
+          <div class="field">
+            <h3>{{t "user.email"}}</h3>
+            <div>{{emails.0.address}}</div>
+          </div>
+          <a class="btn btn-primary btn-small" href="/profile/edit"><i class="icon-edit"></i> {{t "user.editGeneralInfoAction"}}</a><a class="btn btn-primary btn-small" href="/profile/change-password"><i class="icon-asterisk"></i> {{t "user.goToChangePasswordPage"}}</a><a class="btn btn-small" href="/logout"><i class="icon-signout"></i> {{t "user.logoutButton"}}</a>
+          {{#unless emails.0.verified}}
+            <div class="email-not-verified">
+              <div>{{t "user.emailNotVerified"}}</div>
+              <button id="resend-email-verification" class="btn btn-small">{{t "user.resendVerificationEmail"}}</button>
+            </div>
+          {{/unless}}
+        </div>
+      </div>
+      <div class="center-text">
+        <a href="/profile/remove"><i class="icon-trash"></i> {{t "user.remove"}}</a>
+      </div>
+    {{/with}}
+  {{/unless}}
+</template>
+
+<template name="editProfile">
+  {{#if sessionValueEquals "currentContentView" "editProfile"}}
+    <div class="profile-info">
+      <form id="edit-profile-form">
+        <div class="field">
+          <h3>{{t "user.name"}}</h3>
+          <input type="text" name="name">
+        </div>
+        <div class="field">
+          <h3>{{t "user.email"}}</h3>
+          <input type="email" name="email">
+        </div>
+        <div class="pull-right">
+          <a class="btn" href="/profile/general">{{t "user.cancelProfileEdit"}}</a>
+          <input type="submit" class="btn btn-primary" value="{{t "user.saveGeneralInfo"}}">
+        </div>
+      </form>
+    </div>
+  {{/if}}
+</template>
+
+<template name="changePassword">
+  {{#if sessionValueEquals "currentContentView" "changePassword"}}
+    <div class="profile-info">
+      <form id="change-password-form">
+        <h2>{{t "user.changePasswordHeader"}}</h2>
+        <p class="error hidden general-error">{{t "validation.changePasswordFailed"}}</p>
+        <div class="field">
+          <input type="password" name="current-password" placeholder="{{t "user.currentPassword"}}">
+        </div>
+        <div class="field">
+          <input type="password" name="password" placeholder="{{t "user.newPassword"}}">
+          <input type="password" name="password-confirm" placeholder="{{t "user.passwordConfirm"}}">
+        </div>
+        <div class="pull-right">
+          <a class="btn" href="/profile/general">{{t "user.cancelChangePassword"}}</a>
+          <input type="submit" class="btn btn-primary" value="{{t "user.changePasswordAction"}}">
+        </div>
+      </form>
+    </div>
+  {{/if}}
+</template>
+
+<template name="profileComments">
+  {{#if sessionValueEquals "detailViewCurrentTab" "comments"}}
+    <h2>{{t "user.commentsHeader"}}</h2>
+    <div class="comment-section">
+      {{#each comments}}
+        <div class="comment">
+          <p class="datetime">{{shortDate dateTime}}</p>
+          <h3>{{{commentHeader}}}</h3>
+          {{#if this.picture}}
+            <div class="picture-tile"><a href="{{this.picture}}" class="fancybox"><img src="{{this.picture}}-t" /></a></div>
+          {{/if}}
+          {{#if text}}
+            {{newlinesToHtml text}}
+          {{else}}
+            <p class="comment-removed">{{t "comments.commentRemovedTextReplacement"}}</p>
+          {{/if}}
+        </div>
+      {{else}}
+        <h3>{{t "user.noCommentsToShow"}}</h3>
+      {{/each}}
+    </div>
+  {{/if}}
+</template>
+
+<template name="removeProfile">
+  {{#if sessionValueEquals "currentContentView" "removeProfile"}}
+    <div class="profile-info">
+      <h2>{{t "user.removeHeader"}}</h2>
+      <p>{{t "user.removeInfo"}}</p>
+      <input id="remove-profile-challenge" type="text" />
+      <p class="error hidden">{{t "user.removeChallengeResponseIncorrect"}}</p>
+      <div>
+        <a class="btn pull-left" href="/profile/general">{{t "user.removeCancel"}}</a>
+        <button class="btn btn-primary btn-danger pull-right submit">{{t "user.remove"}}</button>
+      </div>
+    </div>
+  {{/if}}
+</template>

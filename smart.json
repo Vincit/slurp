@@ -1,0 +1,15 @@
+{
+  "packages": {
+    "moment": {},
+    "leaflet": {},
+    "jquery-validation": {},
+    "spin": {},
+    "aws-sdk": {},
+    "GraphicsMagick": {},
+    "fancybox": {},
+    "HTML5-History-API": {},
+    "respond": {},
+    "npm": {},
+    "crypto-md5": {}
+  }
+}

@@ -1,0 +1,62 @@
+<template name="detailView">
+  <div class="detail-view {{sessionValue "detailViewState"}}">
+    <button class="close-button icon-remove-sign" />
+    {{#if sessionValueEquals "currentPrimaryView" "siteDetails"}}
+      {{> siteDetails}}
+    {{/if}}
+
+    {{#if sessionValueEquals "currentPrimaryView" "profile"}}
+      {{> profile}}
+    {{/if}}
+
+    {{#if sessionValueEquals "currentPrimaryView" "editRoute"}}
+      {{> editRoute}}
+    {{/if}}
+
+    {{#if sessionValueEquals "currentPrimaryView" "editPlace"}}
+      {{> editPlace}}
+    {{/if}}
+
+    {{#if sessionValueEquals "currentPrimaryView" "importRoute"}}
+      {{> importRoute}}
+    {{/if}}
+
+    {{#if sessionValueEquals "currentPrimaryView" "feedback"}}
+      {{> feedback}}
+    {{/if}}
+
+    {{#if sessionValueEquals "currentPrimaryView" "admin"}}
+      {{> adminTools}}
+    {{/if}}
+
+    {{#if sessionValueEquals "currentPrimaryView" "deletedSites"}}
+      {{> deletedSites}}
+    {{/if}}
+
+    {{#if sessionValueEquals "currentPrimaryView" "info"}}
+      {{> info}}
+    {{/if}}
+
+    {{#if sessionValueEquals "currentPrimaryView" "topLists"}}
+      {{> topLists}}
+    {{/if}}
+  </div>
+</template>
+
+<template name="tabBar">
+  <ul class="tabs">
+    {{#each sessionValue "currentTabs"}}<li{{#if sessionValueEquals "detailViewCurrentTab" identifier}} class="active"{{/if}}><a href="{{link}}">{{title}}</a></li>{{/each}}
+  </ul>
+</template>
+
+<template name="entityHeader">
+  <div class="entity-header">
+    {{#if link}}<a href="{{link}}">{{/if}}
+    {{#if emailHash}}
+      <img src="https://www.gravatar.com/avatar/{{emailHash}}?s=36&d=mm"/>
+    {{/if}}
+    <div class="right-text">{{rightText}}</div>
+    <h3>{{getSiteName name}}</h3>
+    {{#if link}}</a>{{/if}}
+  </div>
+</template>

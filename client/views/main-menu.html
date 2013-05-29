@@ -1,0 +1,84 @@
+<template name="mainMenu">
+  <div id="main-menu"{{#unless isVisible}} class="hidden"{{/unless}}>
+    <i class="dropdown-arrow"></i>
+    <ul>
+      {{#if currentUser}}
+        <li>
+          <a href="/profile/general">
+            <span class="menu-icon icon-user"></span>
+            <span class="menu-text">{{t "mainMenu.profile"}}</span>
+          </a>
+        </li>
+        {{#if currentUser.isAdmin}}
+          <li>
+            <a href="/admin/general">
+              <span class="menu-icon icon-key"></span>
+              <span class="menu-text">{{t "mainMenu.adminTools"}}</span>
+            </a>
+          </li>
+        {{/if}}
+      {{else}}
+        <li>
+          <a href="/login">
+            <span class="menu-icon icon-signin"></span>
+            <span class="menu-text">{{t "mainMenu.login"}}</span>
+          </a>
+        </li>
+      {{/if}}
+      <li class="separator"></li>
+      <li>
+        <a href="/info/guide">
+          <span class="menu-icon icon-info-sign"></span>
+          <span class="menu-text">{{t "mainMenu.info"}}</span>
+        </a>
+      </li>
+      <li>
+        <a href="/feedback">
+          <span class="menu-icon icon-envelope-alt"></span>
+          <span class="menu-text">{{t "mainMenu.giveFeedback"}}</span>
+        </a>
+      </li>
+      <li class="separator"></li>
+      <li>
+        <a href="/top/users">
+          <span class="menu-icon icon-trophy"></span>
+          <span class="menu-text">{{t "mainMenu.topLists"}}</span>
+        </a>
+      </li>
+      <li class="separator"></li>
+      <li>
+        <a href="/add-place">
+          <span class="menu-icon icon-map-marker"></span>
+          <span class="menu-text">{{t "mainMenu.addPlace"}}</span>
+        </a>
+      </li>
+      <li>
+        <a href="/add-route">
+          <span class="menu-icon icon-road"></span>
+          <span class="menu-text">{{t "mainMenu.addRoute"}}</span>
+        </a>
+      </li>
+      <li>
+        <a href="/import-route">
+          <span class="menu-icon icon-upload-alt"></span>
+          <span class="menu-text">{{t "mainMenu.importRoute"}}</span>
+        </a>
+      </li>
+      <li>
+        <a href="/deleted-sites">
+          <span class="menu-icon icon-trash"></span>
+          <span class="menu-text">{{t "mainMenu.deletedSites"}}</span>
+        </a>
+      </li>
+      {{#if currentUser}}
+        <li class="separator"></li>
+        <li>
+          <a href="/logout">
+            <span class="menu-icon icon-signout"></span>
+            <span class="menu-text">{{t "mainMenu.logout"}}</span>
+          </a>
+        </li>
+      {{/if}}
+    </ul>
+  </div>
+</template>

@@ -1,0 +1,120 @@
+// Category icon mixin using a spritesheet
+.category-icon-sprite (@category, @gridSize, @x-normal, @y-normal, @x-active, @y-active) {
+  .category-display .category div.@{category},
+  .category-select .category div.@{category} {
+    background-position: (@x-normal * @gridSize * -1px) (@y-normal * @gridSize * -1px);
+  }
+  .category-select .category.active div.@{category} {
+    background-position: (@x-active * @gridSize * -1px) (@y-active * @gridSize * -1px);
+  }
+  .category-peek .category.@{category} {
+    background-position: (@x-normal * @gridSize * -0.5px) (@y-normal * @gridSize * -0.5px);
+  }
+  .category-peek.white .category.@{category} {
+    background-position: (@x-active * @gridSize * -0.5px) (@y-active * @gridSize * -0.5px);
+  }
+}
+
+.category-display .category div,
+.category-select .category div,
+.category-peek .category {
+  background-image: url(/images/category-icons.png);
+}
+@media (-webkit-min-device-pixel-ratio: 1.5),
+(min-resolution: 144dpi),
+(min-resolution: 1.5dppx) {
+  .category-display .category div,
+  .category-select .category div {
+    background-image: url(/images/category-icons@2x.png);
+  }
+}
+
+.category-icon-sprite(animal-sports, 40, 3, 0, 3, 1);
+.category-icon-sprite(cycling, 40, 8, 0, 8, 1);
+.category-icon-sprite(extreme, 40, 2, 0, 2, 1);
+.category-icon-sprite(hiking, 40, 7, 0, 7, 1);
+.category-icon-sprite(indoor, 40, 0, 0, 0, 1);
+.category-icon-sprite(kids, 40, 4, 0, 4, 1);
+.category-icon-sprite(other, 40, 1, 0, 1, 1);
+.category-icon-sprite(running, 40, 9, 0, 9, 1);
+.category-icon-sprite(water-sports, 40, 6, 0, 6, 1);
+.category-icon-sprite(winter-sports, 40, 5, 0, 5, 1);
+
+.category-display {
+  margin-bottom: 10px;
+}
+.category-display,
+.category-select {
+  margin-right: 1px; // To counteract the negative margin in .category element
+}
+.category-select {
+  margin-bottom: 1px; // Same as above
+}
+.category-display .category,
+.category-select .category {
+  position: relative;
+  display: inline-block;
+  width: 87px;
+  height: 87px;
+  margin: 0 -1px -1px 0;
+  vertical-align: bottom;
+  background-color: #fafafa;
+  border: 1px solid #e0e0e0;
+}
+.category-select .category {
+  cursor: pointer;
+}
+.category-display .category div,
+.category-select .category div {
+  width: 40px;
+  height: 40px;
+  margin: 12px auto 4px;
+  background-size: 400px 80px;
+}
+.category-display .category span,
+.category-select .category span {
+  display: block;
+  line-height: 13px;
+  margin: 0 6px 0;
+  color: @text-turquoise;
+  font-size: 12px;
+  font-weight: 900;
+  text-align: center;
+  text-transform: uppercase;
+}
+.category-select .category:hover {
+  background-color: white;
+}
+.category-display .category.active,
+.category-select .category.active {
+  background-color: @text-turquoise;
+}
+.category-display .category.active div,
+.category-select .category.active div {
+  color: white;
+}
+.category-display .category.active span,
+.category-select .category.active span {
+  color: white;
+}
+.category-peek .category {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin: 11px 5px -1px;
+  background-size: 200px 40px;
+}
+
+
+/* Width dependent spacing */
+@media (min-width: 400px) and (max-width: 599px) {
+  .category-display {
+    margin-bottom: 15px;
+  }
+}
+
+@media (min-width: 600px) {
+  .detail-view .category-display {
+    margin-bottom: 20px;
+  }
+}

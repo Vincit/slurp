@@ -1,0 +1,124 @@
+@import "base.lessimport";
+@import "print.lessimport";
+
+@import "../views/map.lessimport";
+@import "../views/top-view.lessimport";
+@import "../views/detail-view.lessimport";
+@import "../views/profile.lessimport";
+@import "../views/dialog.lessimport";
+@import "../views/main-menu.lessimport";
+@import "../views/admin-tools.lessimport";
+
+// z-index value that ensures that elements appear on top of all map elements.
+// This needs to be high because Internet Explorer 9 seems to have a global
+// stacking context (same for all elements), which doesn't conform to
+// the standard.
+@ui-element-base-z-index: 10000;
+
+.detail-view .close-button,
+.dialog-container .close-button {
+  position: absolute;
+  right: 0;
+  z-index: (@ui-element-base-z-index + 2);
+  padding: 8px 10px 8px 8px;
+  border-radius: 0;
+  border: none;
+  background: transparent;
+  color: @background-blue;
+  font-size: 27px;
+}
+.detail-view .close-button:hover,
+.dialog-container .close-button:hover {
+  color: @active-dark-blue;
+}
+
+#site-edit-sight {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50px;
+  height: 50px;
+  margin-top: -25px;
+  margin-left: -25px;
+  background-image: url(/images/map-crosshair.png);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  pointer-events: none; // Doesn't work on IE
+}
+
+#load-indicator {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.7);
+  height: 100%;
+  width: 100%;
+  top: 0;
+  z-index: (@ui-element-base-z-index + 1000);
+}
+
+/* For enabling full page map using only CSS and
+   that works even when the browser window is resized.
+   Body padding is set to zero because responsive Twitter Bootstrap sets it
+   to some other value on certain media widths. */
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+// Disable browser features to make app appear more native
+html * {
+    // Turn off default press states
+    -webkit-tap-highlight-color: transparent;
+
+    // Disable dragging images
+    -webkit-user-drag: none;
+
+    // Disable save image on long press
+    -webkit-touch-callout: none;
+
+    // Disable selection copy/paste, also disables any kind of selecting
+    // for example if you apply this to an input element, you won't be
+    // able to insert anything to it anymore.
+    // COMMENTED OUT: Causes problems with input elements
+    //-webkit-user-select: none;
+
+    // Disable double-tap-to-zoom on IE10
+    -ms-touch-action: none;
+}
+
+/* Fix issue with block and span input heights with Flat UI */
+input.input-block-level,
+input[class*="span"] {
+    height: 41px !important;
+}
+
+/* To prevent the attribution control from being shown over other stuff. */
+.leaflet-bottom.leaflet-right {
+  z-index: @ui-element-base-z-index !important;
+}
+
+/* To prevent Fancybox from being shown under other UI elements. */
+.fancybox-overlay {
+  z-index: (@ui-element-base-z-index + 10);
+}
+.fancybox-wrap {
+  z-index: (@ui-element-base-z-index + 20);
+}
+.fancybox-opened {
+  z-index: (@ui-element-base-z-index + 30);
+}
+
+.user-removed,
+.comment-removed,
+.unnamed-site {
+  color: @text-light-gray;
+  font-weight: normal;
+}
+
+.center-text {
+  text-align: center;
+}
